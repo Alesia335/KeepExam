@@ -1,0 +1,48 @@
+﻿@page
+@model Keep.Pages.Categories.IndexModel
+@{
+}
+<br />
+
+<div class="container row">
+    <div class="col-8">
+        <h2>Categories list</h2>
+    </div>
+    <div class="col-4">
+        <a asp-page="Create" class="btn btn-info">Create category</a>
+        <a asp-page="/Notes/Create" class="btn btn-info">Create note</a>
+    </div>
+    <div class="col-12 border p-2 mt-2">
+
+        <form method="post">
+            @if (Model.Categories.Count > 0)
+            {
+                <table class="table table-striped border-1">
+                    <tr class="table-secondary">
+                        <th>
+                            <label asp-for="Categories.FirstOrDefault().Name"></label>
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.Categories)
+                    {
+                        <tr>
+                        
+                            <td>
+                                @item.Name
+                            </td>
+                            <td align="right">
+                                <button asp-page-handler="Delete" asp-route-id="@item.Id"  onclick="return confirm('If you delete a category, you will delete all notes associated with that category. Are you sure?')" class="btn btn-danger btn-sm">Delete</button>
+                                <a asp-page="Edit" asp-route-id="@item.Id"  class="btn btn-success btn-sm">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No categories available</p>
+            }
+        </form>
+    </div>
+</div>

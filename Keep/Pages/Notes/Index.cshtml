@@ -1,0 +1,55 @@
+﻿@page
+@model Keep.Pages.Notes.IndexModel
+@{
+}
+
+<br />
+
+<div class="container row">
+    <div class="col-10">
+        <h2>Notes</h2>
+    </div>
+    <div class="col-2">
+        <a asp-page="Create" class="btn btn-info">Create note</a>
+    </div>
+        <div>
+        <p>
+            <form>
+                Title: <input type="text" asp-for="SearchInputTitle" />
+                <select asp-items="Model.Categories" asp-for="SelectedCategoryName">
+                    <option value="">Select category</option>
+                </select>
+                <input type="submit" value="Search" />
+            </form>
+        </p>
+
+    </div>
+        <form method="post">
+            @if (Model.Notes.Count > 0)
+            {
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var item in Model.Notes)
+            {         
+                <div class="col">                
+                    <div class="card h-100">
+                        <div class="card-header">@item.Category.Name
+                        </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Title</h5>
+                                <p class="card-text">@item.Text</p>
+                            </div>
+                        <div class="card-footer">
+                        <button asp-page-handler="Delete" asp-route-id="@item.Id"  onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm">Delete</button>
+                        <a asp-page="Edit" asp-route-id="@item.Id"  class="btn btn-success btn-sm">Edit</a>
+                        </div>
+                    </div>                  
+                </div>
+                    }
+            </div>
+            }
+            else
+            {
+                <p>No notes available. </p>
+            }
+        </form>
+    </div>

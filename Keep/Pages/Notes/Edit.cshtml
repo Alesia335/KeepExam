@@ -1,0 +1,54 @@
+﻿@page
+@model Keep.Pages.Notes.EditModel
+@{
+}
+<br />
+
+<h2>Edit</h2>
+
+<div class="border container" style="padding:30px">
+    <form method="post">
+        <input type="hidden" asp-for="Note.Id" />
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+         <div class="form-group row">
+            <div class="col-4">
+            <label asp-for="Note.Category" class="control-label"></label>
+            </div>
+             <div class="col-4">
+            <select asp-for="Note.CategoryId" class="form-control" asp-items="@Model.Categories"></select>
+            <span asp-validation-for="Note.Category" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <div class="col-4">
+                <label asp-for="Note.Title"></label>
+            </div>
+            <div class="col-4">
+                <input asp-for="Note.Title" class="form-control" />
+                <span asp-validation-for="Note.Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mt-4">
+            <div class="col-4">
+                <label asp-for="Note.Text"></label>
+            </div>
+            <div class="col-4">
+                <input asp-for="Note.Text" class="form-control" />
+                <span asp-validation-for="Note.Text" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row mt-4">
+            <div class="col-3 offset-4">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            <div class="col-3">
+                <a asp-page="Index" class="btn btn-success">Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
