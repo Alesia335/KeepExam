@@ -82,12 +82,11 @@ namespace Keep.Repositories
         public void DeteteGategoryAndNotes(int id)
         {
             
-            var note= _context.Notes.FirstOrDefault(b => b.CategoryId == id);
+            var note= _context.Notes.Where(b => b.CategoryId == id).Select(note => note);
             var category = _context.Categories.FirstOrDefault(b => b.Id == id);
-            if (note != null)
+            foreach (var notes in note)
             {
-                _context.Notes.Remove(note);
-                _context.SaveChanges();
+                _context.Notes.Remove(notes);
             }
                 _context.Categories.Remove(category);
                 _context.SaveChanges();
